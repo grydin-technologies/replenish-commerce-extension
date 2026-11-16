@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Place this project inside src/ScaleUnitSample of the Microsoft Dynamics365Commerce.ScaleUnit
+    sample repository, next to CommerceRuntime, ScaleUnit, POS, ChannelDatabase and Installer.
+    It follows the same pattern as CommerceRuntime.csproj in that repository.
+  -->
+  <Import Project="..\CustomizationPackage.props" />
+
+  <PropertyGroup>
+    <!--
+      Use the same TargetFramework as CommerceRuntime.csproj in the branch you build from.
+      Recent branches use net8.0; older branches use netstandard2.0.
+    -->
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>GrydIn.RealtimeWebhook</RootNamespace>
+    <AssemblyName>GrydIn.RealtimeWebhook</AssemblyName>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Same CRT package that CommerceRuntime.csproj references. -->
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+
+  <!--
+    On netstandard2.0 System.Text.Json is not built in. WebhookJson.cs then falls back to
+    Newtonsoft.Json. Uncomment this block in that case.
+  -->
+  <!--
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  -->
+</Project>
